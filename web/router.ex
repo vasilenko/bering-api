@@ -2,6 +2,7 @@ defmodule Bering.Router do
   use Bering.Web, :router
 
   pipeline :api do
+    plug CORSPlug
     plug :accepts, ["json"]
   end
 

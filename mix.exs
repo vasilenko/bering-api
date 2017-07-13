@@ -4,7 +4,7 @@ defmodule Bering.Mixfile do
   def project do
     [app: :bering,
      version: "0.0.1",
-     elixir: "~> 1.2",
+     elixir: "~> 1.4",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
@@ -17,9 +17,7 @@ defmodule Bering.Mixfile do
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {Bering, []},
-     applications: [:phoenix, :phoenix_pubsub, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex]]
+    [mod: {Bering, []}, extra_applications: [:logger]]
   end
 
   # Specifies which paths to compile per environment.
@@ -35,7 +33,8 @@ defmodule Bering.Mixfile do
      {:phoenix_ecto, "~> 3.0"},
      {:postgrex, ">= 0.0.0"},
      {:gettext, "~> 0.11"},
-     {:cowboy, "~> 1.0"}]
+     {:cowboy, "~> 1.0"},
+     {:cors_plug, "~> 1.2"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
