@@ -5,7 +5,9 @@ defmodule Bering.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", Bering do
+  scope "/", Bering do
     pipe_through :api
+
+    resources "/posts", PostController, except: [:new, :edit]
   end
 end
