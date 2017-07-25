@@ -52,4 +52,20 @@ defmodule Bering.PostController do
 
     send_resp(conn, :no_content, "")
   end
+
+  def like(conn, %{"id" => id}) do
+    post = Repo.get!(Post, id)
+    # Don't do this in 'real' projects
+    changeset = Post.changeset(post, %{like_count: post.like_count + 1})
+
+    case Repo.update(changeset) do
+      {:ok, post} ->
+        render(conn, "show.json", post: post)
+      {:error, changeset} ->
+        conn
+        |> put_status(:unprocessable_entity)
+        |> render(Bering.ChangesetView, "error.json", changeset: changeset)
+    end
+  end
+
 end

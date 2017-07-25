@@ -10,5 +10,6 @@ defmodule Bering.Router do
     pipe_through :api
 
     resources "/posts", PostController, except: [:new, :edit]
+    post "/posts/:id/like", PostController, :like
   end
 end
