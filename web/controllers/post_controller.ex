@@ -3,9 +3,9 @@ defmodule Bering.PostController do
 
   alias Bering.Post
 
-  def index(conn, _params) do
-    posts = Repo.all(Post)
-    render(conn, "index.json", posts: posts)
+  def index(conn, params) do
+    page = Repo.paginate(Post, params)
+    render(conn, "index.json", posts: page.entries)
   end
 
   def create(conn, %{"post" => post_params}) do
