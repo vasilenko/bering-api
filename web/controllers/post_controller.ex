@@ -4,7 +4,15 @@ defmodule Bering.PostController do
   alias Bering.Post
 
   def index(conn, params) do
-    page = Repo.paginate(Post, params)
+    scope =
+      case params do
+        %{"filter" => filter} ->
+          from p in Post, where: like(p.title, ^("%#{filter}%"))
+        _ ->
+          Post
+      end
+
+    page = Repo.paginate(scope, params)
     render(conn, "index.json", posts: page.entries)
   end
 
