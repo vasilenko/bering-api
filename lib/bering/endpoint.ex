@@ -36,5 +36,7 @@ defmodule Bering.Endpoint do
     key: "_bering_key",
     signing_salt: "g/kH3cR2"
 
+  plug CORSPlug
+
   plug Bering.Router
 end
