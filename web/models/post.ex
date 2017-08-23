@@ -20,8 +20,8 @@ defmodule Bering.Post do
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:title, :text, :author, :like_count])
-    |> cast_embed(:image, required: true, with: &image_changeset/2)
-    |> validate_required([:title, :text, :author])
+    |> cast_embed(:image, with: &image_changeset/2)
+    |> validate_required([:title, :author])
   end
 
   defp image_changeset(image, params) do
