@@ -1,0 +1,13 @@
+set +e
+
+while true; do
+  nodetool ping
+  EXIT_CODE=$?
+  if [ $EXIT_CODE -eq 0 ]; then
+    break
+  fi
+done
+
+set -e
+
+bin/bering rpc Elixir.Bering.Release.Tasks migrate
